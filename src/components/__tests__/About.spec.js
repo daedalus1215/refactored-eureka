@@ -5,7 +5,7 @@ import About from '../About.vue';
 describe('About.vue', () => {
     test('renders inner text', () => {
         // Arrange
-        const wrapper = mount(About)
+        const wrapper = mount(About) // allow as many chilren.
 
         // Act
 
