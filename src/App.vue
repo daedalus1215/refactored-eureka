@@ -5,16 +5,11 @@
         <div class="card-header">Newsletter</div>
         <div class="card-body">
           <form @submit.prevent="submit">
-            <div class="mb-2">
-              <input 
-              type="text" 
-              class="form-control" 
-              placeholder="Name" 
-              :value="newsletterName" 
-              />
+            <div class="form-group">
+              <EmojiInput v-model="emoji" :options="{ position: bottom }" />
             </div>
             <div class="mb-2">
-              <EmailInput v-model:email="newsletterEmail"/>
+              <EmailInput v-model:email="newsletterEmail" />
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
@@ -27,16 +22,19 @@
 <script>
 
 import EmailInput from './components/EmailInput.vue';
+import EmojiInput from './components/EmojiInput.vue';
 
 export default {
   name: "App",
   components: {
-    EmailInput
+    EmailInput,
+    EmojiInput
   },
   data() {
     return {
       newsletterName: "",
       newsletterEmail: "",
+      emoji: '',
     };
   },
   methods: {
