@@ -25,6 +25,24 @@ export default {
     close() {
       this.$emit("hide");
     },
+    handler(e) {
+      if (e.code === 'Escape' && this.show) {
+        console.log('Escaping')
+        this.close();
+      }
+    }
+  },
+  created() {
+    document.addEventListener('keydown', this.handler)
+  },
+  unmounted() {
+    document.removeEventListener('keydown', this.handler);
   },
 };
 </script>
+
+<style scoped>
+.modal-dialog {
+  outline: 0;
+}
+</style>
