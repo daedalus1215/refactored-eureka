@@ -20,7 +20,24 @@
 <script>
 export default {
   name: "AppModal",
-  props: ["show"],
+  props: {
+    show: {
+      required: true
+    },
+    scrollable: {
+      default: false
+    },
+  },
+  watch: {
+    show(newVal) {
+      if(newVal && !this.scrollable) {
+        // we need to prevent scrolling for entire page, but we are in the component
+        document.body.style.setProperty('overflow', 'hidden');
+      } else {
+        document.body.style.removeProperty('overflow');
+      }
+    }
+  },
   methods: {
     close() {
       this.$emit("hide");
