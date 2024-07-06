@@ -6,7 +6,7 @@
         <div class="card-body">
           <form @submit.prevent="submit">
             <div class="form-group">
-              <EmojiInput v-model="emoji"/>
+              <EmojiInput v-model="emoji" :options="{ position: bottom }" />
             </div>
             <div class="mb-2">
               <EmailInput v-model:email="newsletterEmail" />

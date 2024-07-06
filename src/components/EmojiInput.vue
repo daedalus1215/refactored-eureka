@@ -1,6 +1,8 @@
 <template>
     <div class="input-group">
-        <input type="text" class="form-control" placeholder="Name" :value="modelValue.emoji" />
+        <input type="text" class="form-control" placeholder="Name" :value="modelValue.emoji" 
+            
+        />
         <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="button" ref="emojiBtn">
                 {{ modelValue ? modelValue.emoji : 'Select' }}
@@ -14,9 +16,17 @@ import { EmojiButton } from '@joeattardi/emoji-button'
 
 export default {
     name: 'EmojiInput',
-    props: ['modelValue'],
+    props: {
+        modelValue: {
+            required: true
+        },
+        options: {
+            required: false,
+            default: () => ({})
+        }
+    },
     mounted() {
-        const picker = new EmojiButton();
+        const picker = new EmojiButton(this.options);
         const btn = this.$refs.emojiBtn;
 
         picker.on('emoji', (emoji) => {
