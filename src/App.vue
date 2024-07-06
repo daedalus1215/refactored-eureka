@@ -6,26 +6,16 @@
         <div class="card-body">
           <form @submit.prevent="submit">
             <div class="mb-2">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Name"
-                v-model="newsletterName"
+              <input 
+              type="text" 
+              class="form-control" 
+              placeholder="Name" 
+              :value="newsletterName" 
+              
               />
             </div>
             <div class="mb-2">
-              <input
-                type="email"
-                class="form-control"
-                placeholder="E-mail"
-                v-model="newsletterEmail"
-                :class="{
-                  'is-valid':
-                    newsletterEmail.length >= 4 && newsletterEmail.length > 0,
-                  'is-invalid':
-                    newsletterEmail.length < 4 && newsletterEmail.length > 0,
-                }"
-              />
+              <EmailInput v-model="newsletterEmail"/>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
@@ -36,8 +26,14 @@
 </template>
 
 <script>
+
+import EmailInput from './components/EmailInput.vue';
+
 export default {
   name: "App",
+  components: {
+    EmailInput
+  },
   data() {
     return {
       newsletterName: "",
