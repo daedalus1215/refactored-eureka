@@ -1,49 +1,27 @@
 <template>
-  <div id="app" class="row d-flex justify-content-center">
-    <div class="col-md-6 mt-3">
-      <div class="card">
-        <div class="card-header">Newsletter</div>
-        <div class="card-body">
-          <form @submit.prevent="submit">
-            <div class="form-group">
-              <EmojiInput v-model="emoji" :options="{ position: bottom }" />
-            </div>
-            <div class="mb-2">
-              <EmailInput v-model:email="newsletterEmail" />
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
-        </div>
-      </div>
+  <div id="app">
+    <div class="mt-2 ml-2">
+      <button type="button" class="btn btn-primary" @click="open = true">
+        Open
+      </button>
     </div>
+
+    <app-modal :show="open" @hide="open = false" />
   </div>
 </template>
 
 <script>
-
-import EmailInput from './components/EmailInput.vue';
-import EmojiInput from './components/EmojiInput.vue';
+import AppModal from "@/components/Modal.vue";
 
 export default {
   name: "App",
   components: {
-    EmailInput,
-    EmojiInput
+    AppModal,
   },
   data() {
     return {
-      newsletterName: "",
-      newsletterEmail: "",
-      emoji: '',
+      open: false,
     };
-  },
-  methods: {
-    submit() {
-      console.log("Newletter Submitted", {
-        name: this.newsletterName,
-        email: this.newsletterEmail,
-      });
-    },
   },
 };
 </script>
