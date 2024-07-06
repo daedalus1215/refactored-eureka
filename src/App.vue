@@ -1,42 +1,53 @@
-<script>
-import { ref } from 'vue';
-
-export default {
-  name: "App",
-  setup() {
-    let num = ref(0);
-    function increment() {
-      num.value++;
-    }
-
-    return {
-      num,
-      increment
-    }
-  }
-};
-</script>
-
-
-
 <template>
-  <div id="app">
-    {{ num }}
-    <button @click="increment">Click me</button>
-    <router-link to="/">Home</router-link>
-    <router-link to="/about/admin">About</router-link>
+  <div id="app" class="row d-flex justify-content-center">
+    <div class="col-md-6 mt-3">
+      <div class="card">
+        <div class="card-header">Newsletter</div>
+        <div class="card-body">
+          <form @submit.prevent="submit">
+            <div class="mb-2">
+              <input 
+              type="text" 
+              class="form-control" 
+              placeholder="Name" 
+              :value="newsletterName" 
+              />
+            </div>
+            <div class="mb-2">
+              <EmailInput v-model:email="newsletterEmail"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
-<style>
-#app {
-  width: 100%;
-  height: 3000px;
-  position: relative;
-}
+<script>
 
-button {
-  width: 100px;
-  height: 40px;
-}
-</style>
+import EmailInput from './components/EmailInput.vue';
+
+export default {
+  name: "App",
+  components: {
+    EmailInput
+  },
+  data() {
+    return {
+      newsletterName: "",
+      newsletterEmail: "",
+    };
+  },
+  methods: {
+    submit() {
+      console.log("Newletter Submitted", {
+        name: this.newsletterName,
+        email: this.newsletterEmail,
+      });
+    },
+  },
+};
+</script>
+
+<style src="bootstrap/dist/css/bootstrap.css"></style>
