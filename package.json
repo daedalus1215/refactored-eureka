@@ -1,17 +1,21 @@
 {
-  "name": "modal",
+  "name": "my-vue-app",
+  "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
+    "test:unit": "vitest --environment jsdom --ui",
     "build": "vite build",
-    "preview": "vite preview --port 4173"
+    "preview": "vite preview"
   },
   "dependencies": {
-    "bootstrap": "^5.1.3",
-    "vue": "^3.2.37"
+    "vue": "^3.4.29"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^2.3.3",
-    "vite": "^2.9.12"
+    "@vitejs/plugin-vue": "^5.0.5",
+    "@vitest/ui": "^1.6.0",
+    "jsdom": "^24.1.0",
+    "vite": "^5.3.1"
   }
 }
