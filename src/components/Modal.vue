@@ -29,12 +29,16 @@ export default {
     },
   },
   watch: {
-    show(newVal) {
-      if(newVal && !this.scrollable) {
+    // configure the watcher more
+    show: {
+      immediate: true,
+      handler(newVal) {
+        if(newVal && !this.scrollable) {
         // we need to prevent scrolling for entire page, but we are in the component
         document.body.style.setProperty('overflow', 'hidden');
       } else {
         document.body.style.removeProperty('overflow');
+      }
       }
     }
   },

@@ -113,7 +113,7 @@
       </button>
     </div>
 
-    <app-modal :show="open" @hide="open = false" :scrollable="true" />
+    <app-modal :show="open" @hide="open = false" :scrollable="false" />
   </div>
 </template>
 
