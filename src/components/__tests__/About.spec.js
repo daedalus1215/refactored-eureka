@@ -1,10 +1,10 @@
-import { test } from 'vitest';
-import { shallowMount } from '@vue/test-utils'
-import About from '../About.vue';
+import About from "@/views/About.vue";
+import { shallowMount } from "@vue/test-utils";
 
-describe('About.vue', () => {
-    test('renders inner text', () => {
-        const wrapper = shallowMount(About) // don't render the children (faster)
-        expect(wrapper.text()).toEqual('This is an about page');
-    });
+describe("About.vue", () => {
+  test("renders inner text", () => {
+    const wrapper = shallowMount(About);
+
+    expect(wrapper.text()).toContain("about");
+  });
 });

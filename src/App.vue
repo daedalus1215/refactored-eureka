@@ -1,31 +1,54 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-
-</script>
-
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <app-header />
+
+  <router-view v-slot="{ Component }">
+    <transition name="fade" mode="out-in">
+      <component :is="Component"></component>
+    </transition>
+  </router-view>
+
+  <app-player />
+
+  <auth />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<script>
+import AppHeader from "@/components/Header.vue";
+import Auth from "@/components/Auth.vue";
+import { mapWritableState } from "pinia";
+import useUserStore from "@/stores/user";
+import { auth } from "./includes/firebase";
+import AppPlayer from "@/components/Player.vue";
+
+export default {
+  name: "App",
+  components: {
+    AppHeader,
+    Auth,
+    AppPlayer,
+  },
+  computed: {
+    ...mapWritableState(useUserStore, ["userLoggedIn"]),
+  },
+  created() {
+    if (auth.currentUser) {
+      this.userLoggedIn = true;
+    }
+  },
+};
+</script>
+
+<style>
+.fade-enter-from {
+  opacity: 0;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+.fade-enter-active {
+  transition: all 0.5s linear;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+.fade-leave-to {
+  transition: all 0s lienar;
+  opacity: 0;
 }
 </style>
