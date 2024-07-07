@@ -1,29 +1,54 @@
 <template>
-  <div id="app">
-    <div class="mt-2 ml-2">
-      <button type="button" class="btn btn-primary" @click="open = true">
-        Open
-      </button>
-    </div>
+  <app-header />
 
-    <app-modal :show="open" @hide="open = false" />
-  </div>
+  <router-view v-slot="{ Component }">
+    <transition name="fade" mode="out-in">
+      <component :is="Component"></component>
+    </transition>
+  </router-view>
+
+  <app-player />
+
+  <auth />
 </template>
 
 <script>
-import AppModal from "@/components/Modal.vue";
+import AppHeader from "@/components/Header.vue";
+import Auth from "@/components/Auth.vue";
+import { mapWritableState } from "pinia";
+import useUserStore from "@/stores/user";
+import { auth } from "./includes/firebase";
+import AppPlayer from "@/components/Player.vue";
 
 export default {
   name: "App",
   components: {
-    AppModal,
+    AppHeader,
+    Auth,
+    AppPlayer,
   },
-  data() {
-    return {
-      open: false,
-    };
+  computed: {
+    ...mapWritableState(useUserStore, ["userLoggedIn"]),
+  },
+  created() {
+    if (auth.currentUser) {
+      this.userLoggedIn = true;
+    }
   },
 };
 </script>
 
-<style src="bootstrap/dist/css/bootstrap.css"></style>
+<style>
+.fade-enter-from {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  transition: all 0.5s linear;
+}
+
+.fade-leave-to {
+  transition: all 0s lienar;
+  opacity: 0;
+}
+</style>
